@@ -6,7 +6,9 @@
 
 import type { TLanguage, ILanguageOption } from "../types";
 
-export const FALLBACK_LANGUAGE: TLanguage = "en";
+// [CUSTOM] reason: 本 fork 默认面向中文用户，将系统兜底语言由 "en" 改为 "zh-CN"。
+// 任何浏览器在没有 localStorage(userLanguage) 时都会落到这里。
+export const FALLBACK_LANGUAGE: TLanguage = "zh-CN";
 
 export const SUPPORTED_LANGUAGES: ILanguageOption[] = [
   { label: "English", value: "en" },

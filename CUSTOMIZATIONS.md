@@ -33,17 +33,28 @@
 
 ### 改动清单
 
-> 目前无改动。首次定制后在此处登记。
+### [001] 默认语言改为简体中文
 
-<!-- 示例：
-### [001] 替换默认 Logo 与品牌色
-- 类型：UI 定制
-- 文件：packages/utils/src/theme/palette-generator.ts、apps/web/public/logo.svg
-- 提交：abc1234
-- 原因：品牌要求；优先走 theme 系统而非改组件源码
-- 同步风险：上游若重构 theme 模块会冲突
-- 可恢复性：低影响，失效时回退到官方品牌即可
--->
+- 类型：修改核心（i18n 常量）
+- 文件：`packages/i18n/src/constants/language.ts`
+- 提交：（待提交）
+- 原因：本 fork 主要面向中文用户，希望首次访问的浏览器在无 `localStorage(userLanguage)` 时直接展示中文；i18n store 仅基于 localStorage + `FALLBACK_LANGUAGE` 决策，没有 env 或扩展点可走
+- 同步风险：上游若调整 `FALLBACK_LANGUAGE` 类型定义、重命名常量或重构 store 初始化逻辑会冲突
+- 可恢复性：低影响。失效时把值改回 `"en"` 即可，UI 也仍然支持用户在 Profile 设置里手动切换
+
+### [002] 全部端口迁移到 19xxx 段
+
+- 类型：修改核心（端口配置）+ 本地配置（.env）
+- 文件：
+  - `apps/web/package.json`、`apps/admin/package.json`、`apps/space/package.json`（dev/preview/start 脚本端口）
+  - `docker-compose-local.yml`（host 端口映射，容器内端口不变）
+  - `apps/{web,admin,space,live,api}/.env`（URL、CORS、PORT，**`.env` 不入 git**，仅供参考）
+- 提交：（待提交，仅含 package.json + docker-compose-local.yml）
+- 端口映射：3000→19000(web) / 3001→19001(admin) / 3002→19002(space) / 3100→19100(live) / 8000→19800(api) / 5432→19432(pg) / 6379→19379(redis) / 9000→19900(minio s3) / 9090→19990(minio console)
+- 原因：3000 与 NewAPI/OneAPI 等本地 AI 网关冲突，5432/6379 与本机常装的 PostgreSQL/Redis 冲突。整体改到 19xxx 段（unprivileged、未被常见服务占用、同前缀易记）规避所有这类冲突
+- 同步风险：上游若改 docker-compose-local.yml 端口结构或 package.json dev script 形式会冲突
+- 可恢复性：中等。若失效需改回原值；同步时如冲突，端口选择是本地偏好，可优先采纳上游版本再重新 `sed` 改回 19xxx
+- 注意：容器间互通端口（POSTGRES_PORT=5432、REDIS_PORT=6379 在 `apps/api/.env`）保持原值，因为它们指容器内端口，与 host 映射无关
 
 ---
 
@@ -51,9 +62,9 @@
 
 每次从 upstream 合并后追加一条。
 
-| 日期 | 合并到版本 | 合并方式 | 冲突文件 | 处理人 | 备注 |
-|------|-----------|---------|---------|--------|------|
-| —    | v1.3.0    | 初始克隆 | —       | —      | fork 起点 |
+| 日期 | 合并到版本 | 合并方式 | 冲突文件 | 处理人 | 备注      |
+| ---- | ---------- | -------- | -------- | ------ | --------- |
+| —    | v1.3.0     | 初始克隆 | —        | —      | fork 起点 |
 
 ---
 
