@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Plane 采用 AGPL-3.0 许可证，本项目继承该许可证并以同样方式发布。关键义务：
 
-1. **保留原始版权与 LICENSE 文件**，根目录 `LICENSE` 不要删除或替换
+1. **保留原始版权与 LICENSE 文件**，根目录 `LICENSE.txt` 不要删除或替换
 2. **衍生作品保持 AGPL-3.0**，不能改成 MIT、私有专有协议或闭源
 3. **网络服务条款**：如果以 SaaS 或对外网络服务形式部署，必须向使用服务的用户提供完整源码下载入口（这是 AGPL 区别于 GPL 的核心条款）
 4. 新代码与原项目作为整体分发时一并以 AGPL-3.0 发布
