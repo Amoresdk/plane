@@ -1,3 +1,9 @@
+> **关于本项目** ｜本仓库基于 [makeplane/plane](https://github.com/makeplane/plane) v1.3.0 二次开发，**已脱离上游独立演进**，不再跟随上游更新。继承并继续遵循 **AGPL-3.0** 许可证（详见 `LICENSE.txt`）。原始版权归 Plane 团队所有；本仓库的二次开发改动版权归本仓库维护者所有，整体仍以 AGPL-3.0 发布。
+>
+> 下方内容为 Plane 上游原版 README，将在后续替换为本项目自己的介绍。
+
+---
+
 <br /><br />
 
 <p align="center">
